@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
+const jwt = require('jsonwebtoken');
 
 /**
  * GET /
@@ -46,9 +47,17 @@ router.get("/post/:id", async (req, res) => {
     let slug = req.params.id;
     const data = await Post.findById({ _id: slug });
 
+    const token = req.cookies.token;
+    let username;
+    if (token) {
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+      username = decodedToken.username;
+    }
+
     const locals = {
       title: data.title,
       description: "Simple Blog created with NodeJS, Express & MongoDb",
+      username: username 
     };
 
     res.render("post", {
@@ -67,9 +76,18 @@ router.get("/post/:id", async (req, res) => {
  */
 router.post("/search", async (req, res) => {
   try {
+
+    const token = req.cookies.token;
+    let username;
+    if (token) {
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+      username = decodedToken.username;
+    }
+
     const locals = {
       title: "Search",
       description: "Search across the site...",
+      username: username
     };
 
     let searchTerm = req.body.searchTerm;

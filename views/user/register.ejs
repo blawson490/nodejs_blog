@@ -1,0 +1,19 @@
+<h3>Register</h3>
+<form action="/register" method="POST">
+  <% if (locals.errorMessage) { %>
+    <div class="alert">
+      <%= locals.errorMessage %>
+    </div>
+  <% } %>
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username">
+
+
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter password" name="password">
+
+    <div class="login-btn-container">
+      <input type="submit" value="Register" class="btn">
+      <a href="/login">Already have an account?</a>
+    </div>
+</form>

@@ -1,0 +1,19 @@
+<h3>Sign In</h3>
+<form action="/login" method="POST">
+  <% if (locals.errorMessage) { %>
+    <div class="alert">
+      <%= locals.errorMessage %>
+    </div>
+  <% } %>
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username">
+
+
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter password" name="password">
+
+    <div class="login-btn-container">
+      <input type="submit" value="Login" class="btn">
+      <a href="/register">Don't have an account?</a>
+    </div>
+</form>

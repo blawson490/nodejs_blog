@@ -1,42 +1,27 @@
 <div class="author">
-  <h1 class="author__heading">Hi, I'm Blake.</h1>
-  <p class="author__body">Web Developer.</p>
-  <p class="author__body">
-    <span id="typed-output"></span><span class="cursor">|</span>
-  </p>
+  <h1 class="author__heading">Hi, @<%= username %></h1>
+  <p class="author__body">Welcome to my blog!</p>
 </div>
 
-<img
-  src="/img/hero-image.webp"
-  alt="person looking out through window"
-  class="hero-image"
-  width="981"
-  height="528"
-/>
-
-
-<h2 class="articles__heading">Contribute</h2>
+<h2 class="articles__heading">Contributions</h2>
 <div class="contribute-container">
   <p class="contribute-text">
-    We warmly welcome your contributions! There's no 
-    need for an account to share your insights with us. 
-    However, if you wish to have the ability to edit or 
-    remove your posts, we kindly ask you to sign in. 
-    This ensures the integrity and quality of the content 
-    on our platform.
+    Thank you for signing in and contributing to our blog! Your ability to share
+    insights is greatly appreciated. Now that you have an account, you have the
+    ability to edit or remove your posts. This not only gives you control over
+    your content, but also helps us maintain the integrity and quality of the
+    content on our platform. We're excited to see your contributions!
   </p>
   <div class="contribute-button-container">
-    <a href="#" class="btn-contribute">Contribute</a>
-    <a href="/login" class="btn">Login</a>
+    <a href="/userdashboard" class="btn">Dashboard</a>
   </div>
 </div>
 
 <section class="articles">
   <div class="posts-title-container">
     <h2 class="articles__heading">Latest Posts</h2>
-    <a href="#">+ Add a post</a>
+    <a href="/create-post">+ Add a post</a>
   </div>
-
   <ul class="article-ul">
     <% data.forEach(post => { %>
     <li>
