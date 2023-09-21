@@ -190,6 +190,12 @@ img {
 
 
 /* Home Article List */
+.post-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .articles__heading {
   margin-top: 4rem;
   font-weight: 400;
@@ -258,6 +264,10 @@ img {
   white-space: pre-wrap;
 }
 
+.post-author {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
 
 /* Footer */
 .footer {
@@ -341,3 +351,71 @@ img {
 .pagination:hover {
   color: var(--black);
 }
+
+.post-title {
+  border: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Editor Container */
+.editor-container {
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Toolbar for creating post */
+
+.toolbar-container {  
+  margin: auto;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+.toolbar-container .ck.ck-toolbar {
+  min-width: 575px;
+}
+
+.toolbar-container .ck.ck-button .ck-button__label {
+  font-size: 0.8em;
+}
+
+.ck.ck-dropdown .ck-dropdown__arrow {
+  width: 8px !important;
+  padding-left: 4px !important;
+}
+
+.toolbar-container .ck.ck-toolbar {
+  border-radius: 10px;
+}
+
+.toolbar-container .ck.ck-toolbar .ck-button__icon {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 978px) {
+  .toolbar-container .ck.ck-toolbar {
+    min-width: 10px;
+    flex-wrap: wrap;
+  }
+}
+
+/* Editor for posts */
+
+
+.editor .ck.ck-editor__main>.ck-editor__editable, .ck.ck-editor__main>.ck-editor__editable {
+  border-radius: 10px !important;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5) !important;
+  min-height: 50vh;
+  border: var(--black) 1px;
+}
+
+

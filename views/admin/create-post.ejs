@@ -1,0 +1,81 @@
+<a href="/dashboard">&larr; Back</a>
+
+<form action="/add-post" method="POST">
+  <div class="admin-title">
+    <h2>Add New Post</h2>
+    <input type="submit" value="Add" class="btn" />
+  </div>
+  <label for="title"><b>Title</b></label>
+  <input type="text" placeholder="Post Title" name="title" class="post-title"/>
+  <label for="title"><b>Title</b></label>
+  <input type="text" placeholder="Author" name="author" class="post-title"/>
+  <label for="body"><b>Content</b></label>
+  <div class="editor-container">
+    <div id="editor" class="editor"></div>
+    <div id="toolbar-container" class="toolbar-container"></div>
+  </div>
+  <textarea name="body" id="editor-data" style="display: none"></textarea>
+</form>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor.create(document.querySelector("#editor"), {
+    toolbar: {
+      items: [
+        "heading",
+        "|",
+        "bold",
+        "italic",
+        "link",
+        "bulletedList",
+        "numberedList",
+        "|",
+        "blockQuote",
+        "insertTable",
+        "|",
+        "undo",
+        "redo",
+      ],
+      shouldNotGroupWhenFull: false,
+    },
+    language: "en",
+    image: {
+      toolbar: [
+        "imageTextAlternative",
+        "imageStyle:inline",
+        "imageStyle:block",
+        "imageStyle:side",
+      ],
+    },
+    table: {
+      contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"],
+    },
+    licenseKey: "",
+  })
+    .then((editor) => {
+      window.editor = editor;
+      const toolbarContainer = document.querySelector("#toolbar-container");
+
+      toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+
+      // Update the value of the hidden textarea whenever the editor data changes
+      editor.model.document.on("change:data", () => {
+        document.querySelector("#editor-data").value = editor.getData();
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+</script>
+<script>
+  const editorElement = document.querySelector(".ck-editor__editable");
+  const toolbarContainer = document.querySelector(".toolbar-container");
+
+  editorElement.addEventListener("focus", () => {
+    toolbarContainer.style.opacity = "1";
+  });
+
+  editorElement.addEventListener("blur", () => {
+    toolbarContainer.style.opacity = "0";
+  });
+</script>
