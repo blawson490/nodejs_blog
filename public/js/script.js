@@ -18,6 +18,16 @@ document.addEventListener("DOMContentLoaded", function () {
     this.setAttribute("aria-expanded", "false");
   });
 
+  // Service worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('../js/service-worker.js').then(function(registration) {
+      }, function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+
   const typeStrings = ["Weclo", "Welcome tomy b", "Welcome to my blog. "];
 
   let stringIndex = 0;
