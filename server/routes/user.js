@@ -61,7 +61,8 @@ router.get("/login", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    let { username, password } = req.body;
+    username = username.trim().toLowerCase();
     const user = await User.findOne({ username });
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
@@ -111,7 +112,8 @@ router.get("/register", async (req, res) => {
  */
 router.post("/register", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    let { username, password } = req.body;
+    username = username.trim().toLowerCase();
     const type = 'user';
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -242,11 +244,13 @@ router.get("/create-post", authMiddleware, async (req, res) => {
  */
 router.post("/create-post", authMiddleware, async (req, res) => {
   try {
+    const decoded = jwt.verify(req.cookies.token, jwtSecret);
+    const username = decoded.username;
     try {
       const newPost = new Post({
         title: req.body.title,
         body: req.body.body,
-        author: req.body.author
+        author: username
       });
       await Post.create(newPost);
       res.redirect('/dashboard')
@@ -295,6 +299,20 @@ router.put("/edit-post/:id", authMiddleware, async (req, res) => {
     })
 
     res.redirect(`../post/${req.params.id}`);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+/*
+ * Delete Post
+ */ 
+router.delete("/delete-post/:id", authMiddleware, async (req, res) => {
+  try {
+
+    await Post.deleteOne({ _id: req.params.id });
+
+    res.redirect('/userdashboard');
   } catch (error) {
     console.log(error);
   }

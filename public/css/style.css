@@ -42,6 +42,32 @@ textarea {
   margin-bottom: 1rem;
 }
 
+input:focus {
+  outline: 2px solid black;
+}
+
+.username_validity {
+  font-size: small;
+  padding: 0px;
+  margin-top: -15px;
+}
+
+.invalid {
+  outline: 2px solid red;
+}
+
+.invalid_username {
+  color: red;
+}
+
+.valid_username {
+  color: green;
+}
+
+.valid {
+  outline: 2px solid green;
+}
+
 .btn {
   background-color: var(--black);
   border: none;
@@ -392,7 +418,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -406,7 +432,7 @@ img {
 .searchBar.open {
   visibility: visible;
   opacity: 1;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
 }
 
 .search__form {
@@ -453,6 +479,7 @@ img {
   border: #fff;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 10px;
 }
 
 /* Editor Container */
@@ -515,4 +542,24 @@ img {
   border: var(--black) 1px;
 }
 
+.content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.guest_author {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.username_check {
+  cursor: pointer;
+  text-decoration: underline;
+  padding-bottom: 4px;
+}
 

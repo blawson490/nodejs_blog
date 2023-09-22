@@ -24,14 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
   let charIndex = 0;
 
   function type() {
-    if (charIndex < typeStrings[stringIndex].length) {
-      document.getElementById("typed-output").innerText +=
-        typeStrings[stringIndex].charAt(charIndex);
-      charIndex++;
-      setTimeout(type, 100);
-    } else if (stringIndex < typeStrings.length - 1) {
-      // Check if it's not the last string
-      setTimeout(erase, 100);
+    const typedOutput = document.getElementById("typed-output");
+    if (typedOutput) {
+      if (charIndex < typeStrings[stringIndex].length) {
+        typedOutput.innerText += typeStrings[stringIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 100);
+      } else if (stringIndex < typeStrings.length - 1) {
+        setTimeout(erase, 100);
+      }
     }
   }
 

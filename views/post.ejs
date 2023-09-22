@@ -1,14 +1,11 @@
-
 <div class="post-body">
   <h1><%= data.title %></h1>
   <div class="post_details">
     <a href="#" class="post-author">@<%= data.author %></a>
-    <!-- Check if the tokens current username is the data.author and if so, display: flex-->
     <% if (locals.username === data.author) { %>
-      <div class="edit-button-container">
-        <a href="#" class="btn">Edit</a>
-        <a href="#" class="btn-delete btn">Delete</a>
-      </div>
+    <div class="edit-button-container">
+        <a href="/edit-post/<%= data._id %>" class="btn">Edit</a>
+    </div>
     <% } %>
   </div>
   <%- data.body %>

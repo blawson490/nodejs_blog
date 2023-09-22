@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+
 
 /**
  * GET /
@@ -70,6 +72,22 @@ router.get("/post/:id", async (req, res) => {
   }
 });
 
+router.get("/guest-post", async (req, res) => {
+  try {
+    const locals = {
+      title: "Add Post",
+      description: "Create Post for Simple NodeJS Blog",
+    };
+    const data = await Post.find();
+    res.render("user/create-post", {
+      locals,
+      currentRoute: '/posts'
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 /**
  * GET /
  * Post :id
@@ -117,50 +135,18 @@ router.get("/about", (req, res) => {
   });
 });
 
-module.exports = router;
+/*
+ * Check Username
+ */
 
-// function insertPostData() {
-//     Post.insertMany([
-//         {
-//             title: "Building a Blog with NodeJS and MongoDB",
-//             body: "This is the body text for the first post"
-//         },
-//         {
-//             title: "Understanding Express Middleware",
-//             body: "This is the body text for the second post"
-//         },
-//         {
-//             title: "NodeJS Event Loop Explained",
-//             body: "This is the body text for the third post"
-//         },
-//         {
-//             title: "Working with MongoDB in NodeJS",
-//             body: "This is the body text for the fourth post"
-//         },
-//         {
-//             title: "Building RESTful APIs with NodeJS and MongoDB",
-//             body: "This is the body text for the fifth post"
-//         },
-//         {
-//             title: "NodeJS Streams Explained",
-//             body: "This is the body text for the sixth post"
-//         },
-//         {
-//             title: "Understanding Mongoose ODM",
-//             body: "This is the body text for the seventh post"
-//         },
-//         {
-//             title: "NodeJS and MongoDB Authentication",
-//             body: "This is the body text for the eighth post"
-//         },
-//         {
-//             title: "Deploying NodeJS and MongoDB Applications",
-//             body: "This is the body text for the ninth post"
-//         },
-//         {
-//             title: "Optimizing NodeJS and MongoDB Performance",
-//             body: "This is the body text for the tenth post"
-//         }
-//     ])
-// }
-// insertPostData();
+router.get("/check-username/:username", async (req, res) => {
+  const username = req.params.username.trim().toLowerCase();
+  const user = await User.findOne({ username });
+  if (user) {
+    res.json({ exists: true });
+  } else {
+    res.json({ exists: false });
+  }
+});
+
+module.exports = router;

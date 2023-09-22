@@ -1,14 +1,48 @@
+<% if (locals.username) { %>
 <a href="/userdashboard">&larr; Back</a>
+<% } else { %>
+<h2>Disclaimer</h2>
+<p>
+  Please note, if you wish to modify your post in the future, you will need to
+  register an account using the same username provided in the "Author" field. If
+  an account with the given username already exists, you will be prompted to log
+  in. We appreciate your understanding and cooperation.
+</p>
+<a href="/login" class="btn">Login</a>
+<% } %>
 <form action="/create-post" method="POST">
   <div class="admin-title">
     <h2>Add New Post</h2>
     <input type="submit" value="Create" class="btn" />
   </div>
   <label for="title"><b>Title</b></label>
-  <input type="text" placeholder="Post Title" name="title" class="post-title"/>
-  <label for="title"><b>Author</b></label>
-  <input type="text" placeholder="Author" name="author" class="post-title" value="@<%= locals.username %>" disabled/>
-  <label for="body"><b>Content</b></label>
+  <input type="text" placeholder="Post Title" name="title" class="post-title" />
+  <div class="guest_author">
+    <label for="title"><b>Author</b></label>
+    <a class="username_check">Check Username</a>
+  </div>
+  <% if (locals.username) { %>
+  <input
+    type="text"
+    placeholder="Author"
+    name="author"
+    class="post-title"
+    value="@<%= locals.username %>"
+    disabled
+  />
+  <% } else { %>
+  <input
+    type="text"
+    placeholder="Author"
+    name="author"
+    class="post-title"
+    id="username"
+  />
+  <p class="username_validity"></p>
+  <% } %>
+  <div class="content-container">
+    <label for="body"><b>Content</b></label>
+  </div>
   <div class="editor-container">
     <div id="editor" class="editor"></div>
   </div>
@@ -38,14 +72,6 @@
       shouldNotGroupWhenFull: false,
     },
     language: "en",
-    image: {
-      toolbar: [
-        "imageTextAlternative",
-        "imageStyle:inline",
-        "imageStyle:block",
-        "imageStyle:side",
-      ],
-    },
     table: {
       contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"],
     },
@@ -57,13 +83,40 @@
 
       toolbarContainer.appendChild(editor.ui.view.toolbar.element);
 
-      
       editor.model.document.on("change:data", () => {
         document.querySelector("#editor-data").value = editor.getData();
       });
     })
     .catch((error) => {
       console.error(error);
+    });
+
+  document
+    .querySelector(".username_check")
+    .addEventListener("click", function () {
+      const username = document.querySelector("#username").value;
+      const usernameValidity = document.querySelector(".username_validity");
+      const usernameInput = document.querySelector("#username");
+      if (username) {
+        fetch(`/check-username/${username}`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.exists) {
+              usernameValidity.textContent = "Username already exists";
+              usernameValidity.classList.add("invalid_username");
+              usernameInput.classList.add("invalid");
+            } else {
+              usernameValidity.textContent = "Username available";
+              usernameValidity.classList.add("valid_username");
+              usernameInput.classList.add("valid");
+            }
+          })
+          .catch((error) => console.error("Error:", error));
+      } else {
+        usernameValidity.textContent = "Please enter a valid username";
+        usernameValidity.classList.add("invalid_username");
+        usernameInput.classList.add("invalid");
+      }
     });
 </script>
 <script>
