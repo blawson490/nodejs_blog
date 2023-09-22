@@ -1,0 +1,22 @@
+{
+  "name": "NodeJS Blog",
+  "short_name": "NodeJS Blog",
+  "description": "A simple blog application built with NodeJS, Express, and MongoDB.",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF5EE",
+  "theme_color": "#1c1c1c",
+  "icons": [
+    {
+      "src": "/img/site_image.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/site_image.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -58,4 +58,82 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   window.onload = type;
+
+  // Favicon
+
+  function generateFavicon() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 100;
+    canvas.height = 100;
+    const ctx = canvas.getContext("2d");
+  
+    ctx.fillStyle = "#FAF5EE";
+    ctx.fillRect(0, 0, 100, 100);
+  
+    const radius = 15;
+    ctx.clearRect(0, 0, radius, radius);
+    ctx.clearRect(100 - radius, 0, radius, radius);
+    ctx.clearRect(0, 100 - radius, radius, radius);
+    ctx.clearRect(100 - radius, 100 - radius, radius, radius);
+  
+    ctx.fillStyle = "black";
+    ctx.font = "300 60px Poppins";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("B", canvas.width / 2, canvas.height / 2);
+  
+    return canvas.toDataURL();
+  }
+  
+  const faviconDataURL = generateFavicon();
+  
+  function setFavicon(dataURL) {
+    let link =
+      document.querySelector('link[rel*="icon"]') ||
+      document.createElement("link");
+    link.type = "image/x-icon";
+    link.rel = "shortcut icon";
+    link.href = dataURL;
+    document.getElementsByTagName("head")[0].appendChild(link);
+  }
+  
+  setFavicon(faviconDataURL);
+
+  // apple-touch-icon
+  function generateAppleTouchIcon() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 180;
+    canvas.height = 180;
+    const ctx = canvas.getContext("2d");
+  
+    ctx.fillStyle = "#FAF5EE";
+    ctx.fillRect(0, 0, 100, 100);
+  
+    const radius = 15;
+    ctx.clearRect(0, 0, radius, radius);
+    ctx.clearRect(100 - radius, 0, radius, radius);
+    ctx.clearRect(0, 100 - radius, radius, radius);
+    ctx.clearRect(100 - radius, 100 - radius, radius, radius);
+  
+    ctx.fillStyle = "black";
+    ctx.font = "300 60px Poppins";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("B", canvas.width / 2, canvas.height / 2);
+  
+    return canvas.toDataURL();
+  }
+  
+  const appleTouchIconDataURL = generateAppleTouchIcon();
+  function setAppleTouchIcon(dataURL) {
+    let link =
+      document.querySelector('link[rel="apple-touch-icon"]') ||
+      document.createElement("link");
+    link.rel = "apple-touch-icon";
+    link.href = dataURL;
+    document.getElementsByTagName("head")[0].appendChild(link);
+  }
+  
+  setAppleTouchIcon(appleTouchIconDataURL);
+
 });
