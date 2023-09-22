@@ -125,11 +125,17 @@
   const editorElement = document.querySelector(".ck-editor__editable");
   const toolbarContainer = document.querySelector(".toolbar-container");
 
-  editorElement.addEventListener("focus", () => {
-    toolbarContainer.style.opacity = "1";
+  editorElement.addEventListener('focus', () => {
+    toolbarContainer.style.opacity = '1';
+    toolbarContainer.style.poistion = 'absolute';
+    toolbarContainer.style.bottom = 'auto';
+    toolbarContainer.style.top = '0'
   });
 
-  editorElement.addEventListener("blur", () => {
-    toolbarContainer.style.opacity = "0";
+  editorElement.addEventListener('blur', () => {
+    toolbarContainer.style.opacity = '0';
+    toolbarContainer.style.position = 'fixed';
+    toolbarContainer.style.bottom = '8%';
+    toolbarContainer.style.top = 'auto';
   });
 </script>
