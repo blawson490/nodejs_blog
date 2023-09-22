@@ -107,13 +107,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const ctx = canvas.getContext("2d");
   
     ctx.fillStyle = "#FAF5EE";
-    ctx.fillRect(0, 0, 100, 100);
+    ctx.fillRect(0, 0, 180, 180);
   
     const radius = 15;
     ctx.clearRect(0, 0, radius, radius);
-    ctx.clearRect(100 - radius, 0, radius, radius);
-    ctx.clearRect(0, 100 - radius, radius, radius);
-    ctx.clearRect(100 - radius, 100 - radius, radius, radius);
+    ctx.clearRect(180 - radius, 0, radius, radius);
+    ctx.clearRect(0, 180 - radius, radius, radius);
+    ctx.clearRect(180 - radius, 180 - radius, radius, radius);
   
     ctx.fillStyle = "black";
     ctx.font = "300 60px Poppins";
