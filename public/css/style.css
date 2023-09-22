@@ -292,6 +292,10 @@ img {
   align-items: center;
 }
 
+.posts-title-container a {
+  margin-top: 33px;
+}
+
 .post-info {
   display: flex;
   flex-direction: column;
@@ -491,24 +495,25 @@ img {
 
 /* Toolbar for creating post */
 
-.toolbar-container {  
-  margin: auto;
+.toolbar-container {
   position: fixed;
   bottom: 8%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
+  max-width: 100%;
+  padding: 0px; 
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  transition: opacity 0.3s ease;
-  opacity: 0;
-}
-.toolbar-container .ck.ck-toolbar {
-  min-width: 575px;
+  /* transition: opacity 0.3s ease;
+  opacity: 0; */
 }
 
-.toolbar-container .ck.ck-button .ck-button__label {
-  font-size: 0.8em;
+.toolbar-container .ck.ck-icon {
+  font-size: 0.6em !important;
 }
 
 .ck.ck-dropdown .ck-dropdown__arrow {
@@ -517,18 +522,15 @@ img {
 }
 
 .toolbar-container .ck.ck-toolbar {
-  border-radius: 10px;
+  max-width: 100%; 
+  box-sizing: border-box;
+  border-radius: 10px; 
 }
 
-.toolbar-container .ck.ck-toolbar .ck-button__icon {
-  width: 14px;
-  height: 14px;
-}
-
-@media (max-width: 978px) {
-  .toolbar-container .ck.ck-toolbar {
-    min-width: 10px;
-    flex-wrap: wrap;
+@media (max-width: 600px) {
+  .toolbar-container, .ck.ck-toolbar {
+    flex-direction: column;
+    max-width: 95%;
   }
 }
 
