@@ -76,11 +76,11 @@ input:focus {
   text-decoration: none;
   margin: 4px 2px; 
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .btn-delete {
-  padding: 10px 16px;
-  background-color: var(--red);
+  background-color: var(--red) !important;
 }
 
 .btn-contribute {
@@ -392,6 +392,11 @@ img {
 .admin-posts {
   padding: 0;
   margin: 0;
+}
+
+.admin-post-controls {
+  display: flex;
+  flex-direction: row;
 }
 
 .admin-post-controls form {
