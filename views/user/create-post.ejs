@@ -19,7 +19,9 @@
   <input type="text" placeholder="Post Title" name="title" class="post-title" />
   <div class="guest_author">
     <label for="title"><b>Author</b></label>
-    <a class="username_check">Check Username</a>
+    <% if (!locals.username) { %>
+        <a class="username_check">Check Username</a>
+    <% } %>
   </div>
   <% if (locals.username) { %>
   <input
