@@ -130,7 +130,19 @@ router.post("/search", async (req, res) => {
 });
 
 router.get("/about", (req, res) => {
+  const token = req.cookies.token;
+    let username;
+    if (token) {
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+      username = decodedToken.username;
+    }
+    const locals = {
+      title: "About",
+      description: "About this nodejs blog",
+      username: username
+    };
   res.render("about", {
+    locals,
     currentRoute: '/about'
   });
 });
