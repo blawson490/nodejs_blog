@@ -3,6 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="<%= locals.title %>" />
+    <meta property="og:description" content="<%= locals.description %>" />
+    <meta property="og:url" content="https://difficult-ring.cyclic.cloud/" />
+    <meta property="og:image" content="../../public/img/site_image.png" />
+    <meta property="og:type" content="website" />
+
+    <!-- General Meta Tag -->
+    <meta name="title" content="<%= locals.title %>" />
+    <meta name="description" content="<%= locals.description %>" />
+    <link rel="image_src" href="../../public/img/site_image.png" />>
+
     <title><%= locals.title %></title>
     <meta name="description" content=" <%= locals.description %>" />
     <link rel="stylesheet" href="/css/style.css" />
@@ -11,10 +24,8 @@
   <body>
     <%- include('../partials/search.ejs') %>
     <div class="container">
-      <% if (locals.username) { %>
-         <%- include('../partials/header_user.ejs') %>
-      <% } else { %> 
-        <%- include('../partials/header.ejs') %> <% } %>
+      <% if (locals.username) { %> <%- include('../partials/header_user.ejs') %>
+      <% } else { %> <%- include('../partials/header.ejs') %> <% } %>
       <main class="main"><%- body %></main>
       <%- include('../partials/footer.ejs') %>
     </div>
